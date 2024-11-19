@@ -37,7 +37,7 @@ class AddToCart extends StatelessWidget {
                 child: const Text(
                   "BUY NOW",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                      fontWeight: FontWeight.bold, color: Colors.black),
                 )),
           )
         ],

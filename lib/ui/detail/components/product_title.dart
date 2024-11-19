@@ -10,29 +10,29 @@ class ProductTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    //definisiakn ukuran proposional gambar sebagai variable const
-    const double imageWidthRatio = 0.60; //35% dari lebar layar
-    const double imageheigthRatio = 0.28; //ngambil 20% dari tinggi layar
+    // Definisi ukuran proposional gambar sebagai variable const
+    const double imageWidthRatio = 0.55; // 60% dari lebar layar
+    const double imageheigthRatio = 0.30; // 28% dari tinggi layar
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: defaultpadding),
+      padding: const EdgeInsets.only(left: 10),
       child: Column(
         crossAxisAlignment:
             CrossAxisAlignment.start, // Aligns text to the start
         children: [
+          // Membungkus Text dengan Container berwarna untuk melihat ukuran yang diambil
           const Text(
             "Leather Hand Bag", // Static title
-            style: TextStyle(color: Colors.white, fontSize: 15),
+            style: TextStyle(color: Colors.black, fontSize: 15),
           ),
           Text(
             product.title, // Dynamic product title
             style: const TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 26,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 10),
           Row(
             children: [
               Expanded(
@@ -41,13 +41,13 @@ class ProductTitle extends StatelessWidget {
                   children: [
                     const Text(
                       "Price",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                     ),
                     Text(
-                      "${product.price}",
+                      product.getFormattedPrice(),
                       style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
+                        color: Colors.black,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -59,9 +59,9 @@ class ProductTitle extends StatelessWidget {
                 child: Image.asset(
                   product.image,
                   width: size.width *
-                      imageWidthRatio, // gunakan ratio untuk lebar gambar.
+                      imageWidthRatio, // Gunakan ratio untuk lebar gambar
                   height: size.height *
-                      imageheigthRatio, // Gunakan ratio untuk tinggi gambar.
+                      imageheigthRatio, // Gunakan ratio untuk tinggi gambar
                   fit: BoxFit.contain, // Ensure proper scaling
                 ),
               ),

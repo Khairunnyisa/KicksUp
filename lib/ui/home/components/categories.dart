@@ -1,5 +1,6 @@
 import 'package:e_commerce/consts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -17,42 +18,62 @@ class _CategoriesState extends State<Categories> {
     "Reebok",
     "Skechers"
   ];
-  // untuk ngasih tau selected index biar dia start dari 0
+
+  List<String> svgPicture = [
+    "assets/images/adidas.svg",
+    "assets/images/nike.svg",
+    "assets/images/puma.svg",
+    "assets/images/converse.svg",
+    "assets/images/reebok.svg",
+    "assets/images/skechers.svg",
+  ];
+
   int selectedIndex = 0;
 
   @override
-  // context: argumen/parameter yg ambil buildcontext
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: defaultpadding),
-      // builder:untuk bangun data, untuk nge build UI nya
       child: SizedBox(
-        height: 25,
-        // biar list nya bisa di scroll secara horizontal
+        height: 100, // adjust height to accommodate the circle and text
         child: ListView.builder(
-            // scrollDirection: mengatur arah scroll
             scrollDirection: Axis.horizontal,
             itemCount: categories.length,
-            // menampung atau membangun data yang akan ditampilkan di UI Screen
             itemBuilder: (context, index) => _buildCategory(index)),
       ),
     );
   }
 
-  // mendeteksi gesture tergantung sama device nya
   GestureDetector _buildCategory(int index) {
     return GestureDetector(
-      //inisialisasi ketika mau ada perubahan state
       onTap: () {
         setState(() {
-          // buat ngasih tau biar dimulai dari 0
           selectedIndex = index;
         });
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: defaultpadding),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
+            // Lingkaran yang membungkus icon brand
+            Container(
+              padding: const EdgeInsets.all(13),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: selectedIndex == index
+                    ? primaryColor.withOpacity(0.2) // warna jika terpilih
+                    : Colors.grey.withOpacity(0.1), // warna default
+              ),
+              child: SizedBox(
+                width: 30, // ukuran lingkaran lebih besar
+                height: 30,
+                child: SvgPicture.asset(
+                  svgPicture[index],
+                  color: selectedIndex == index ? primaryColor : Colors.grey,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8), // Memberikan jarak antara icon dan text
             Text(
               categories[index],
               style: TextStyle(
@@ -60,12 +81,6 @@ class _CategoriesState extends State<Categories> {
                   color:
                       selectedIndex == index ? primaryColor : secondaryColor),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: defaultpadding / 8),
-              height: 2,
-              width: 30,
-              color: selectedIndex == index ? primaryColor : secondaryColor,
-            )
           ],
         ),
       ),

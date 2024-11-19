@@ -39,9 +39,9 @@ class DetailScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: size.height * 0.30),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: defaultpadding),
+                    margin: EdgeInsets.only(top: size.height * 0.33),
+                    padding: const EdgeInsets.only(
+                        left: defaultpadding, right: defaultpadding),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -67,7 +67,7 @@ class DetailScreen extends StatelessWidget {
                   ),
                   // Widget yang berguna
                   Positioned(
-                    top: size.height * 0.05,
+                    top: size.height * 0.07,
                     left: 0,
                     right: 0, // Mengatur right menjadi 0 agar lebih responsif
                     child: Container(

@@ -2,8 +2,9 @@ import 'package:e_commerce/consts.dart';
 import 'package:e_commerce/models/products.dart';
 import 'package:flutter/material.dart';
 
-class ItemCard extends StatelessWidget {
-  const ItemCard({super.key, required this.product, required this.press});
+class ItemCardWishlist extends StatelessWidget {
+  const ItemCardWishlist(
+      {super.key, required this.product, required this.press});
 
   final Product product;
   final VoidCallback press;

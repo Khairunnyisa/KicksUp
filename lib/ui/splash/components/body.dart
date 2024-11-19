@@ -1,4 +1,5 @@
 import 'package:e_commerce/consts.dart';
+import 'package:e_commerce/ui/auth/login_screen.dart';
 import 'package:e_commerce/ui/home/catalogue_screen.dart';
 import 'package:e_commerce/ui/splash/components/splash_content.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +24,23 @@ class _BodyState extends State<Body> {
   // kalau kita mau bikin variable, harus didalam block code
   // dasar pengambilan data API
   List<Map<String, String>> splashData = [
-    {"text": "Step Into Your Story", "image": "assets/images/splash_1.png"},
-    {"text": "Crafted for Comfort", "image": "assets/images/splash_2.png"},
-    {"text": "Your Style, Your Rules", "image": "assets/images/splash_3.png"}
+    {
+      "text": "Step Into Your Story",
+      "image": "assets/images/splash_1.png",
+      "description": "Time to flex your style and rock those kicks!"
+    },
+    {
+      "text": "Crafted for Comfort",
+      "image": "assets/images/splash_2.png",
+      "description": "Shoes so comfy, you’ll forget you’re even wearing them!"
+    },
+    {
+      "text": "Your Style, Your Rules",
+      "image": "assets/images/splash_3.png",
+      "description": "Dress how you want, no limits—just pure vibes!"
+    }
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +75,9 @@ class _BodyState extends State<Body> {
                       // itembuilder: ngebuat jembatan (jembatan antara UI dan data)
                       itemBuilder: (context, index) => SplashContent(
                           text: splashData[index]["text"]!,
-                          image: splashData[index]["image"]!))),
+                          image: splashData[index]["image"]!,
+                          description: splashData[index]["description"]!))),
+
               // safearea: biar gak nutupin sama sistem
             ),
             // buat bikin dots indicator
@@ -93,7 +109,7 @@ class _BodyState extends State<Body> {
                             //context: represent for our current page
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const CatalogueScreen()));
+                                builder: (context) => LoginScreen()));
                       } else {
                         //ini untuk swipe ke slide berikutnya, jadi kalau belum sampe slide akhir, buttonnya itu bakal menggerakkan ke halaman berikutnya dengan animatetopage
                         _pageController.animateToPage(currentPage + 1,

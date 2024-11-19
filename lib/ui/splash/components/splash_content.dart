@@ -1,4 +1,3 @@
-import 'package:e_commerce/consts.dart';
 import 'package:e_commerce/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +7,10 @@ class SplashContent extends StatelessWidget {
     super.key,
     required this.text,
     required this.image,
+    required this.description,
   });
   // kita mau bikin bisa di swipe
-  final String text, image;
+  final String text, image, description;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,7 @@ class SplashContent extends StatelessWidget {
       children: [
         // spacer: ngasih jarak gap antar widget
         const Spacer(),
-        Text(
-          "KicksUp",
-          style: TextStyle(
-              color: primaryColor,
-              fontSize: getProportionateScrenWidth(36.0),
-              fontWeight: FontWeight.bold),
-        ),
+
         // harus pake Image.asset biar bisa
         Image.asset(
           image,
@@ -32,12 +26,29 @@ class SplashContent extends StatelessWidget {
           width: 350,
           fit: BoxFit.contain,
         ),
+
         Text(
           text,
           style: TextStyle(
-              color: Colors.grey, fontSize: getProportionateScrenWidth(18)),
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: getProportionateScrenWidth(23),
+          ),
           // untuk membuat rata tengah
           textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 10),
+
+        SizedBox(
+          width: 300, // Sesuaikan dengan lebar maksimal yang diinginkan
+          child: Text(
+            description,
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: getProportionateScrenWidth(18),
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );

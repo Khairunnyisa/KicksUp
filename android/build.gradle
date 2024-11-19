@@ -16,3 +16,4 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+// build gradle: nge daftarin library juga tapi buat android

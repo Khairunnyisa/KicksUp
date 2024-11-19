@@ -31,6 +31,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+   
+    
+    
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -38,6 +42,13 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.10 #library for SVG usage in our project
   provider: ^6.1.2 #library for state management
+  intl: ^0.17.0
+  fluttertoast: ^8.2.8
+  shared_preferences: ^2.3.2
+  font_awesome_flutter: ^10.7.0
+  # image_picker: ^1.1.2
+ 
+  
 
 dev_dependencies:
   flutter_test:
@@ -78,13 +89,20 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Muli
-      fonts:
-        - asset: assets/fonts/muli/Muli.ttf
-        - asset: assets/fonts/muli/Muli-Bold.ttf
-          weight: 600
-        - asset: assets/fonts/muli/Muli-Light.ttf
-          weight: 300
+  - family: Airbnb Cereal
+    fonts:
+      - asset: assets/fonts/airbnb/AirbnbCereal_W_Bd.otf
+        weight: 700
+      - asset: assets/fonts/airbnb/AirbnbCereal_W_Bk.otf
+        weight: 300
+      - asset: assets/fonts/airbnb/AirbnbCereal_W_Blk.otf
+        weight: 900
+      - asset: assets/fonts/airbnb/AirbnbCereal_W_Lt.otf
+        weight: 200
+      - asset: assets/fonts/airbnb/AirbnbCereal_W_Md.otf
+        weight: 500
+      - asset: assets/fonts/airbnb/AirbnbCereal_W_XBd.otf
+        weight: 800
           
     # - family: Trajan Pro
     #   fonts:
