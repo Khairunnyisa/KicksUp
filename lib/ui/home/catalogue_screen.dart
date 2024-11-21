@@ -1,5 +1,6 @@
 import 'package:e_commerce/consts.dart';
 import 'package:e_commerce/models/products.dart';
+import 'package:e_commerce/ui/cart/cart_screen.dart';
 import 'package:e_commerce/ui/detail/detail_screen.dart';
 import 'package:e_commerce/ui/home/components/bottom_nav_bar.dart';
 import 'package:e_commerce/ui/home/components/categories.dart';
@@ -43,45 +44,54 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 16.0),
-              child: CircleAvatar(
-                backgroundImage: AssetImage("assets/images/profile_img.png"),
+      appBar: _selectedIndex == 0
+          ? AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.white,
+              elevation: 0,
+              title: const Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0),
+                    child: CircleAvatar(
+                      backgroundImage:
+                          AssetImage("assets/images/profile_img.png"),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "Hi, Nisa",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            SizedBox(width: 10),
-            Text(
-              "Hi, Nisa",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: Colors.black,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: CustomSearchDelegate(),
-              );
-            },
-            icon: const Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.shopping_cart_checkout_outlined),
-          ),
-        ],
-      ),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    showSearch(
+                      context: context,
+                      delegate: CustomSearchDelegate(),
+                    );
+                  },
+                  icon: const Icon(Icons.search),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CartScreen(),
+                        ));
+                  },
+                  icon: const Icon(Icons.shopping_cart_checkout_outlined),
+                ),
+              ],
+            )
+          : null,
       body: _selectedIndex == 0
           ? SingleChildScrollView(
               child: Column(

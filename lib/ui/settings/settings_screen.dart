@@ -11,6 +11,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // inisialisasi themeProvider dikelas kita
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         appBar: AppBar(
@@ -18,6 +19,7 @@ class SettingsScreen extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () {
+                  // kalau kita gak nge set apapun, yg muncul pertama positive = true. pake bang operator. kalau true yg muncul pertama itu yg light mode
                   themeProvider.toggleTheme(!themeProvider.isDarkTheme);
                 },
                 icon: Icon(

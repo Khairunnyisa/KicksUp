@@ -85,6 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 if (value == null || value.isEmpty) {
                   return "Name is required";
                 }
+
                 return null;
               },
             ),
@@ -98,6 +99,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Email is required";
+                }
+                if (!value.endsWith("@gmail.com")) {
+                  return "Please fill with valid email";
                 }
                 return null;
               },

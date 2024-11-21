@@ -6,6 +6,7 @@ import 'package:e_commerce/ui/detail/components/color_and_size.dart';
 import 'package:e_commerce/ui/detail/components/description.dart';
 import 'package:e_commerce/ui/detail/components/fav_button.dart';
 import 'package:e_commerce/ui/detail/components/product_title.dart';
+import 'package:e_commerce/ui/wishlist/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -58,7 +59,9 @@ class DetailScreen extends StatelessWidget {
                         const SizedBox(height: defaultpadding),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [CartCounter(), FavButton()],
+                          children: [
+                            CartCounter(),
+                          ],
                         ),
                         const SizedBox(height: defaultpadding),
                         AddToCart(product: product),

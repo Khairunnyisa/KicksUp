@@ -43,8 +43,14 @@ class LoginScreen extends StatelessWidget {
                 ),
                 // melakukan validasi apakah value nya itu masuk atau tidak
                 validator: (value) {
+                  // kalau misal value nya kosong, dia akan mereturn email is required
                   if (value == null || value.isEmpty) {
                     return "Email is required";
+                  }
+                  // kalo misalkan value itu akhiranya gmail.com. kalau ada ini, dia negasi nya
+                  // note itu artinya positif
+                  if (!value.endsWith("gmail.com")) {
+                    return "Please fill with valid email";
                   }
                   return null;
                 },
