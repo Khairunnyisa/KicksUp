@@ -16,6 +16,12 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Settings'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamed(context, '/home');
+            },
+          ),
           actions: [
             IconButton(
                 onPressed: () {

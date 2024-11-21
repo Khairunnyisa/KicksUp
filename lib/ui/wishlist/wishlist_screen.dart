@@ -16,6 +16,14 @@ class _WishlistScreenState extends State<WishlistScreen> {
   Widget build(BuildContext context) {
     List<Product> displayedProducts = product.take(4).toList();
     return Scaffold(
+      appBar: AppBar(
+          title: const Text("Wishlist"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamed(context, '/home');
+            },
+          )),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
