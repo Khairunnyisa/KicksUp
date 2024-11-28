@@ -11,45 +11,45 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // inisialisasi themeProvider dikelas kita
     final themeProvider = Provider.of<ThemeProvider>(context);
+
+    // Ambil warna teks yang sesuai dengan mode tema
+    final textColor = themeProvider.isDarkTheme ? Colors.white : Colors.black;
+
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Settings'),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pushNamed(context, '/home');
-            },
-          ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  // kalau kita gak nge set apapun, yg muncul pertama positive = true. pake bang operator. kalau true yg muncul pertama itu yg light mode
-                  themeProvider.toggleTheme(!themeProvider.isDarkTheme);
-                },
-                icon: Icon(
-                  themeProvider.isDarkTheme
-                      ? Icons.dark_mode
-                      : Icons.light_mode,
-                  color: themeProvider.isDarkTheme
-                      ? Colors.amberAccent
-                      : Colors.black,
-                ))
-          ],
+      appBar: AppBar(
+        title: const Text('Settings'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushNamed(context, '/home');
+          },
         ),
-        body: SingleChildScrollView(
-            child: Column(
+        actions: [
+          IconButton(
+            onPressed: () {
+              themeProvider.toggleTheme(!themeProvider.isDarkTheme);
+            },
+            icon: Icon(
+              themeProvider.isDarkTheme ? Icons.dark_mode : Icons.light_mode,
+              color:
+                  themeProvider.isDarkTheme ? Colors.amberAccent : Colors.black,
+            ),
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(defaultpadding),
+            Padding(
+              padding: const EdgeInsets.all(defaultpadding),
               child: Text(
                 "Account",
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black),
+                    color: textColor), // Menggunakan warna dinamis
               ),
             ),
             const ListTile(
@@ -58,18 +58,16 @@ class SettingsScreen extends StatelessWidget {
               trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(
-                  horizontal: 20.0), // Atur margin di sini
+              margin: const EdgeInsets.symmetric(horizontal: 20.0),
               child: const Divider(),
             ),
             const ListTile(
               leading: FaIcon(FontAwesomeIcons.cartShopping),
-              title: Text("Shipping Adress"),
+              title: Text("Shipping Address"),
               trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(
-                  horizontal: 20.0), // Atur margin di sini
+              margin: const EdgeInsets.symmetric(horizontal: 20.0),
               child: const Divider(),
             ),
             const ListTile(
@@ -78,8 +76,7 @@ class SettingsScreen extends StatelessWidget {
               trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(
-                  horizontal: 20.0), // Atur margin di sini
+              margin: const EdgeInsets.symmetric(horizontal: 20.0),
               child: const Divider(),
             ),
             const ListTile(
@@ -87,29 +84,56 @@ class SettingsScreen extends StatelessWidget {
               title: Text("Delete Account"),
               trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
-            const Padding(
-              padding: EdgeInsets.all(defaultpadding),
+            Padding(
+              padding: const EdgeInsets.all(defaultpadding),
               child: Text(
                 "App Settings",
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black),
+                    color: textColor), // Menggunakan warna dinamis
               ),
             ),
             const ListTile(
-              title: Text("Eneble Face ID For Log In"),
+              title: Text("Enable Face ID For Log In"),
               trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
             const ListTile(
-              title: Text("Eneble Push Notifications"),
+              title: Text("Enable Push Notifications"),
               trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
             const ListTile(
               title: Text("Enable Location Service"),
               trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
+            // Menambahkan ListTile untuk Logout
+            Padding(
+              padding: const EdgeInsets.all(defaultpadding),
+              child: Text(
+                "Account Management",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: textColor), // Menggunakan warna dinamis
+              ),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.exit_to_app,
+                color: Colors.red,
+              ),
+              title: const Text("Logout"),
+              trailing: const Icon(Icons.arrow_forward_ios_rounded),
+              onTap: () {
+                Navigator.pushNamed(context, '/on-boarding');
+                // Logic logout dapat ditambahkan di sini
+                // Misalnya, memanggil fungsi untuk keluar dari akun
+                // Navigator.pushNamed(context, '/login'); // Arahkan ke layar login
+              },
+            ),
           ],
-        )));
+        ),
+      ),
+    );
   }
 }

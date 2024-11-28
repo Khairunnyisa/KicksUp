@@ -6,51 +6,24 @@ class BottomNavBar extends StatelessWidget {
   final ValueChanged<int> onItemTapped;
 
   const BottomNavBar(
-      {super.key, required this.selectedIndex, required this.onItemTapped});
+      {super.key,
+      required this.selectedIndex, // untuk mngeasih tau index yang dipilih, wadah utama
+      required this.onItemTapped});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.home,
-            color: selectedIndex == 0
-                ? primaryColor
-                : Colors.grey[400], // Warna Home tergantung kondisi
-          ),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.favorite,
-            color: selectedIndex == 1
-                ? primaryColor
-                : Colors.grey[400], // Warna Wishlist tergantung kondisi
-          ),
-          label: 'Wishlist',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.settings,
-            color: selectedIndex == 2
-                ? primaryColor
-                : Colors.grey[400], // Warna Settings tergantung kondisi
-          ),
-          label: 'Settings',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.person,
-            color: selectedIndex == 3
-                ? primaryColor
-                : Colors.grey[400], // Warna Profile tergantung kondisi
-          ),
-          label: 'Profile',
-        ),
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Wishlist'),
+        BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Setting'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],
       currentIndex: selectedIndex,
-      selectedItemColor: primaryColor, // Warna untuk ikon yang dipilih
+      selectedItemColor: primaryColor,
+      unselectedItemColor: Colors.grey, // Warna untuk item yang tidak dipilih
+      backgroundColor: Colors.white, // Warna latar belakang navbar
+      type: BottomNavigationBarType.fixed, // Pastikan ukuran item tetap
       onTap: onItemTapped,
     );
   }

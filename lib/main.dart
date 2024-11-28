@@ -1,6 +1,7 @@
 import 'package:e_commerce/consts.dart';
 import 'package:e_commerce/state-management/cart_provider.dart';
 import 'package:e_commerce/state-management/theme_provider.dart';
+import 'package:e_commerce/state-management/wishlist_provider.dart';
 import 'package:e_commerce/ui/auth/login_screen.dart';
 import 'package:e_commerce/ui/auth/register_screen.dart';
 import 'package:e_commerce/ui/cart/cart_screen.dart';
@@ -8,6 +9,7 @@ import 'package:e_commerce/ui/home/catalogue_screen.dart';
 import 'package:e_commerce/ui/home/components/item_card.dart';
 import 'package:e_commerce/ui/profile/profile_screen.dart';
 import 'package:e_commerce/ui/settings/settings_screen.dart';
+import 'package:e_commerce/ui/splash.dart';
 import 'package:e_commerce/ui/splash/components/splash_content.dart';
 import 'package:e_commerce/ui/splash/splash_screen.dart';
 import 'package:e_commerce/ui/wishlist/component_wishlist/item_card_wishlist.dart';
@@ -22,6 +24,7 @@ void main() {
       MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => ThemeProvider()),
     ChangeNotifierProvider(create: (_) => CartProvider()),
+    ChangeNotifierProvider(create: (_) => WishlistProvider()),
   ], child: const FloShop()));
 }
 
@@ -59,8 +62,10 @@ class _FloShopState extends State<FloShop> {
               )),
           initialRoute: '/',
           routes: {
-            '/': (context) => SplashScreen(),
+            '/': (context) => Splash(),
+            '/on-boarding': (context) => SplashScreen(),
             '/register': (context) => RegisterScreen(),
+            '/login': (context) => LoginScreen(),
             '/home': (context) => const CatalogueScreen(),
             '/wishlist': (context) => const WishlistScreen(),
             '/settings': (context) => SettingsScreen(),

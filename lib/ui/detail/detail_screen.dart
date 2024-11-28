@@ -16,6 +16,7 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int quantity = 1;
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -25,10 +26,15 @@ class DetailScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.favorite_border_outlined)),
+            onPressed: () {
+              Navigator.pushNamed(context, '/wishlist');
+            },
+            icon: const Icon(Icons.favorite_border_outlined),
+          ),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/cart');
+              },
               icon: const Icon(Icons.shopping_cart_checkout_outlined)),
         ],
       ),
@@ -57,14 +63,20 @@ class DetailScreen extends StatelessWidget {
                         const SizedBox(height: defaultpadding),
                         Description(product: product),
                         const SizedBox(height: defaultpadding),
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CartCounter(),
+                            CartCounter(product: product),
+                            FavButton(
+                              product: product,
+                            )
                           ],
                         ),
                         const SizedBox(height: defaultpadding),
-                        AddToCart(product: product),
+                        AddToCart(
+                          product: product,
+                          quantity: quantity,
+                        ),
                       ],
                     ),
                   ),

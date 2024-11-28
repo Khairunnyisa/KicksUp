@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// ini adalah satu-satunya acuan untuk data yang digunakan
 class Product {
   final String image, title, description;
   final int price, size, id;

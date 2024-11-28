@@ -6,11 +6,14 @@ class ItemCard extends StatelessWidget {
   const ItemCard({super.key, required this.product, required this.press});
 
   final Product product;
+  // VoidCallback: sebuah method
+  // kegunaan VoidCallback: untuk bagian ontap
   final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      // press: dummy action
       onTap: press,
       child: Column(
         children: [

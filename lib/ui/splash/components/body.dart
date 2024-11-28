@@ -14,6 +14,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   int currentPage = 0;
 
+  // buat viewpager, buat pindah halaman karena lebih dari 1
   final PageController _pageController = PageController();
 
   // List<String> product = List.generate(
@@ -45,6 +46,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      // untuk menghindari menabraknya dengan system
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -64,6 +66,7 @@ class _BodyState extends State<Body> {
                       // value: kita mau manggil sebuah argumen yang data type nya int maka gunakan value argumen
                       onPageChanged: (value) {
                         // initial state method for statefulWidget behaviour
+                        // setstate hanya digunakan di stateful
                         setState(() {
                           currentPage = value;
                         });
@@ -81,6 +84,7 @@ class _BodyState extends State<Body> {
               // safearea: biar gak nutupin sama sistem
             ),
             // buat bikin dots indicator
+            // biar gaada blank space,untuk jadiin widget kita bisa memanfaatkan ruang kosong yg ada
             Expanded(
                 child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -1,61 +1,123 @@
-import 'package:e_commerce/consts.dart';
-import 'package:e_commerce/models/products.dart';
-import 'package:e_commerce/ui/detail/detail_screen.dart';
-import 'package:e_commerce/ui/wishlist/component_wishlist/item_card_wishlist.dart';
+import 'package:e_commerce/state-management/wishlist_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class WishlistScreen extends StatefulWidget {
+class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
 
   @override
-  State<WishlistScreen> createState() => _WishlistScreenState();
-}
-
-class _WishlistScreenState extends State<WishlistScreen> {
-  @override
   Widget build(BuildContext context) {
-    List<Product> displayedProducts = product.take(4).toList();
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Wishlist"),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pushNamed(context, '/home');
-            },
-          )),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Bagian GridView
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultpadding),
-              child: GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: defaultpadding,
-                  crossAxisSpacing: defaultpadding,
-                  childAspectRatio: 0.75,
-                ),
-                itemCount: displayedProducts.length,
-                itemBuilder: (context, index) => ItemCardWishlist(
-                  product: product[index],
-                  press: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          DetailScreen(product: product[index]),
+        title: const Text("Wishlist"),
+      ),
+      body: wishlistProvider.wishlistItem.isEmpty
+          ? Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Gambar untuk menunjukkan wishlist kosong
+                  Image.asset(
+                    'assets/images/empty_favorite.png', // Path gambar wishlist kosong
+                    height: 150,
+                    fit: BoxFit.contain,
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Your wishlist is empty!',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
                     ),
                   ),
-                ),
+                ],
               ),
+            )
+          : ListView.builder(
+              itemCount: wishlistProvider.itemCount,
+              itemBuilder: (context, index) {
+                final wishlistItem = wishlistProvider.wishlistItem.values
+                    .toList()[index]; // Mendapatkan item berdasarkan index
+                return Stack(
+                  children: [
+                    // Kartu untuk item wishlist
+                    Card(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      color: const Color(0xFFF7F9FC),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          children: [
+                            // Gambar produk
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                wishlistItem.image,
+                                height: 60,
+                                width: 60,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            const SizedBox(width: 15),
+                            // Informasi produk
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    wishlistItem.title,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    "Rp${wishlistItem.price.toStringAsFixed(0)}",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    // Ikon love di pojok kanan atas
+                    Positioned(
+                      top: 30,
+                      right: 20,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                          size: 28,
+                        ),
+                        onPressed: () {
+                          // Menghapus item dari wishlist
+                          wishlistProvider.removeItemFromFav(wishlistItem.id);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                  '${wishlistItem.title} removed from wishlist!'),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
-          ],
-        ),
-      ),
     );
   }
 }

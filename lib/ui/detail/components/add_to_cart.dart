@@ -6,9 +6,10 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class AddToCart extends StatelessWidget {
-  const AddToCart({super.key, required this.product});
+  const AddToCart({super.key, required this.product, required this.quantity});
 
   final Product product;
+  final int quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +26,15 @@ class AddToCart extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
                 border: Border.all(color: product.color)),
             child: IconButton(
+              icon: const Icon(Icons.add_shopping_cart),
               onPressed: () {
-                cartProvider.addItem(
-                  product.id.toString(),
-                  product.title,
-                  product.price,
-                );
+                cartProvider.addItem(product.id.toString(), product.title,
+                    product.price, product.image, quantity);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text("Successfully add ${product.title} to cart"),
                   duration: Duration(seconds: 2),
                 ));
               },
-              icon: const Icon(Icons.add_shopping_cart),
             ),
           ),
           Expanded(
@@ -47,8 +45,8 @@ class AddToCart extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18))),
                 onPressed: () {
-                  cartProvider.addItem(
-                      product.id.toString(), product.title, product.price);
+                  cartProvider.addItem(product.id.toString(), product.title,
+                      product.price, product.image, quantity);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content:
                         Text("Successfully add ${product.title} is Purchased"),

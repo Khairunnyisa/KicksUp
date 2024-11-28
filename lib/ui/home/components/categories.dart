@@ -8,8 +8,11 @@ class Categories extends StatefulWidget {
   @override
   State<Categories> createState() => _CategoriesState();
 }
+// categories ini sebagai viewpager
+// viewpager: cara untuk menampilkan sebuah tab tab
 
 class _CategoriesState extends State<Categories> {
+  // untuk inisialisasi viewpager
   List<String> categories = [
     "Adidas",
     "Nike",
