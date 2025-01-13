@@ -1,3 +1,4 @@
+import 'package:e_commerce/ui/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -19,12 +20,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       elevation: 0,
-      title: const Row(
+      title: Row(
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: 16.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage("assets/images/profile_img.png"),
+          GestureDetector(
+            onTap: () {
+              // Navigasi ke halaman profil
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()),
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.only(left: 16.0),
+              child: CircleAvatar(
+                backgroundImage: AssetImage("assets/images/profile_img.png"),
+              ),
             ),
           ),
           SizedBox(width: 10),

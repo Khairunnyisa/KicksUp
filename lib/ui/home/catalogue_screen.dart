@@ -1,8 +1,6 @@
 import 'package:e_commerce/consts.dart';
 import 'package:e_commerce/models/products.dart';
 import 'package:e_commerce/state-management/theme_provider.dart';
-import 'package:e_commerce/ui/cart/cart_screen.dart';
-import 'package:e_commerce/ui/detail/detail_screen.dart';
 import 'package:e_commerce/ui/home/components/bottom_nav_bar.dart';
 import 'package:e_commerce/ui/home/components/categories.dart';
 import 'package:e_commerce/ui/home/components/header.dart';
@@ -11,7 +9,6 @@ import 'package:e_commerce/ui/home/components/pay.dart';
 import 'package:e_commerce/ui/home/components/search.dart';
 import 'package:e_commerce/ui/profile/profile_screen.dart';
 import 'package:e_commerce/ui/settings/settings_screen.dart';
-import 'package:e_commerce/ui/wishlist/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +32,6 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
 
   final List<Widget> _widgetOptions = [
     const CatalogueScreen(), // Home
-    const WishlistScreen(), // Wishlist
     // SettingsScreen(isDarkTheme: isDarkTheme, onThemeChanged: onThemeChanged)
     const SettingsScreen(), // Settings
     const ProfileScreen(), // Profile
@@ -64,13 +60,6 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
                   context: context,
                   delegate: CustomSearchDelegate(),
                 );
-              },
-              onCartPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CartScreen(),
-                    ));
               },
             )
           : null,
@@ -183,33 +172,6 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: textColor),
-                    ),
-                  ),
-
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: defaultpadding),
-                    child: GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: defaultpadding,
-                        crossAxisSpacing: defaultpadding,
-                        childAspectRatio: 0.75,
-                      ),
-                      itemCount: product.length,
-                      itemBuilder: (context, index) => ItemCard(
-                        product: product[index],
-                        press: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                DetailScreen(product: product[index]),
-                          ),
-                        ),
-                      ),
                     ),
                   ),
                 ],
